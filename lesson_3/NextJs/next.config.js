@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-// https://nextjs.org/docs/api-reference/next.config.js/custom-webpack-config
 
 // Cara Manual :
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
