@@ -1,11 +1,10 @@
 # Webpack tuts 
 
-# Lesson 1
-## A. what is webpack?
+# Lesson 1 what is webpack?
 
-![webpack](public/images/webpack.png)
+![webpack](lesson_1/public/images/webpack.png)
 
-### singkat cerita webpack adalah module bundler
+## Webpack adalah module bundler
 apa sih module bundler? singkat cerita coba deh bayangin lu install lodash tapi ga pake next js atau react. pure di html dan css biasa, gimana caranya?
 
 pas jaman sebelum ada webpack atau module bundler lainnya yaitu jaman jaman jquery dan js vanilla. ya tentu saja di copy file source code nya taruh di assets dan jalanin pake tag di file html seperti ini kan?
@@ -21,28 +20,22 @@ well jaman sudah berganti di tahun 2012 an, webpack pun release dan memudahkan k
 - Loaders — Webpack can transform files such as CSS, images, and fonts into modules that can be included in the bundle.
 - Plugins — Webpack has a wide range of plugins that can be used to optimize code, generate assets, and customize the build process.
 
-sekarang pertanyaan gw sama, gimana caranya kalo mau pake lodash tapi setelah ada webpack di halaman yang pake html dan css doang no react no next js no vite dll?
+sekarang pertanyaan gw sama, gimana caranya kalo mau pake lodash tapi setelah ada webpack di halaman yang pake html dan css doang no react no next js no vite dll? cek readme.md lesson_1 untuk jawabannya.
 
-1. ya tentu saja install aja pake npm
-2. npm init
-3. npm install lodash
-4. npm install --save-dev webpack webpack-cli kalo leled coba npm i -g webpack lalu npm i webpack-cli
+# Lesson 2 Getting deeper
 
-lalu di package.json nya, di bagian script tinggal tambah build seperti ini:
-```json
-...
-"scripts": {
-    "build" : "webpack"
-},
-...
-```
-5. bikin public/index.html, dan src/index.js, intinya import si src/index.js di public/index.html dan coba jalanin console.log atau apa disana. terus coba import lodash si src/index.js nya terus jalanin, pasti error tapi step selanjutnya bakalan ngefix itu
-6. jalanin dah
-```shell
-npm run build
-```
-7. di index.html nya arahin ke dist/main.js yang baru aja di create sama si webpack. akses lagi tuh html dan boom lodash works
-8. selamat you already learn how to use webpack the really basic stuff tho
+## Other Usecase of webpack
+ada beberapa config yang bisa dilakukan di webpack, seperti sudah dijelaskan di usecase webpack ada 3 topik utama yang akan kita cover di lesson 2. karena module bundling udah gw jelasin kan ya di lesson 1.
 
+## A. Basic config and loaders
+ada beberapa masalah di lesson 1, yaitu gimana klo halaman nya multipage? gimana kalo init point nya bukan src/index.js. gimana kalo kita ingin pake scss dll. ya jawabannya ada di lesson 2.
 
-# Lesson 2
+## B. Code Splitting
+oh yeah code splitting is great kalo lu punya banyak halaman atau modules dan well ga mungkin di jadiin satu js yang gede ajah. karena akan ngaruh di first contentful pain. dan load index nya.
+
+## C. Plugin Webpack
+config kebanyakan? plugin solusinya.
+
+# Lesson 3 Webpack dalam React and NextJS
+
+topik ini sebenernya cuman contoh contoh aja gimana nerapin webpack di dalam projek yang webpack nya sudah di atur/di config sama library atau framework, tapi ingin menambahkan kegunaan atau config tambahan.
