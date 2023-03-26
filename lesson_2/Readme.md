@@ -1,30 +1,83 @@
-# Lesson 1
+# Lesson 2
 
-1. ya tentu saja install aja pake npm
-2. npm init
-3. npm install lodash
-4. npm install --save-dev webpack webpack-cli kalo leled coba npm i -g webpack lalu npm i webpack-cli
+## A. Webpack Config
+### 1. pertama kita create dulu 3 file
+- webpack.common.js ni gunanya untuk config webpack yang dipake bersama
+- webpack.dev.js ini untuk dev, biar dia bisa hot reload, dan jit build
+- webpack.prod.js ini untuk bener bener build project, uglify code, process css dan static in semua assets
 
-lalu di package.json nya, di bagian script tinggal tambah build seperti ini:
+### 2. package.json config
+karena ada dev dan prod gituh, maka di package.json nya juga perlu tambahan script :
 ```json
 ...
 "scripts": {
-    "build" : "webpack"
-},
+    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "dev": "webpack serve --open --config webpack.dev.js"
+}
 ...
 ```
-5. bikin public/index.html, dan src/index.js, intinya import si src/index.js di public/index.html dan coba jalanin console.log atau apa disana. terus coba import lodash si src/index.js nya terus jalanin, pasti error tapi step selanjutnya bakalan ngefix itu
-6. jalanin dah
-```shell
-npm run build
+jadi intinya yang di run pertama kali adalah webpack.common.js kemudian antara prod atau dev.
+
+### 3. webpack entry
+```js
+const path = require('path');
+
+// tanpa code splitting
+module.exports = {
+  entry: './src/js/index.js',
+  output: {
+    filename: 'bundlekece.bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+
+//dengan code splitting
+module.exports = {
+  entry: {
+    index: { import: './src/js/index.js', dependOn: 'shared' },
+    sum: { import: './src/js/sum.js', dependOn: 'shared' },
+    shared: 'lodash',
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
 ```
-7. di index.html nya arahin ke dist/main.js yang baru aja di create sama si webpack. akses lagi tuh html dan boom lodash works
-8. selamat you already learn how to use webpack the really basic stuff tho
+pertama adalah entry dan output, entry adalah tempat dimana js file kita letakkan. intinya kodingan utama js kita, kalo dengan code splitting entry bisa jadi object dan bisa pake dependOn jika ada module yg di pake rame rame, sehingga tidak di bundle barengan.
 
-troubleshooting, hah ga bisa buka karena ga tau pathnya sans? lu bisa bikin server dummy pake python3 :
+output adalah file js yang di hasilkan atau bundlenya yang nantinya akan di pake buat render web jadinya. karena klo pake code splitting dia ada 3 maka output kita bisa tulis "[name]" gituh untuk membedakannya.
 
-```sh
-python -m http.server 3000
+
+### 4. module dan plugins
+untuk module dan plugins, macem macem sih settingnya tergantung module atau plugin yang digunakan, misal klo kita pake .babel
+```js
+// contoh setting module babel,
+module: {
+  rules: [
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+    },
+  ],
+},
+// contoh setting plugin html
+plugins: [new HtmlWebpackPlugin({})],
 ```
 
-lalu akses localhost:3000/public nya
+module dan plugins bisa juga kita satukan pake merge.
+```js
+const { merge } = require('webpack-merge');
+module.exports = merge(config1, config2)
+```
+
+### 5. devServer
+kalo ingin kita jalankan tapi hotreload itu bisa juga pake devserver confignya sebagai berikut :
+```js
+devServer: {
+    contentBase: './dist',
+    port: 3000
+},
+```
+contentbase adalah folder dimana kita pengen file file tersebut nongol di browser untuk di serve disini kita pake ./dist karena di output nya gw set ke ./dist. dan port adalah port tujuan yg akan di serve.
