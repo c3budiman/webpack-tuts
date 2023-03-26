@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { join } from 'lodash';
 import '../scss/main.scss';
 
-console.log(_.join(['Index', 'module', 'ditambahkan!'], ' '));
+console.log(join(['Index', 'module', 'ditambahkan!'], ' '));

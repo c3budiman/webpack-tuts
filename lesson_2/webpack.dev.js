@@ -1,23 +1,20 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
+        hot: true,
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: true
+        },
         contentBase: './dist',
-        port: 3000
+        port: 3000,
     },
-    module: {
-        rules: [
-            {
-                test: /\.(sa|sc|c)ss$/,
-                use: [
-                    { loader: 'css-loader', options: { sourceMap: true } },
-                    { loader: 'postcss-loader', options: { sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true } },
-                ],
-            },
-        ],
-    },
+    plugins: [
+        new BundleAnalyzerPlugin()
+    ]
 });
