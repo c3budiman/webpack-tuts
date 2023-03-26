@@ -26,7 +26,7 @@ sekarang pertanyaan gw sama, gimana caranya kalo mau pake lodash tapi setelah ad
 1. ya tentu saja install aja pake npm
 2. npm init
 3. npm install lodash
-4. npm install --save-dev webpack webpack-cli
+4. npm install --save-dev webpack webpack-cli kalo leled coba npm i -g webpack lalu npm i webpack-cli
 
 lalu di package.json nya, di bagian script tinggal tambah build seperti ini:
 ```json
@@ -41,7 +41,7 @@ lalu di package.json nya, di bagian script tinggal tambah build seperti ini:
 ```shell
 npm run build
 ```
-7. di index.html nya arahin ke dist/index.js yang baru aja di create sama si webpack. akses lagi tuh html dan boom lodash works
+7. di index.html nya arahin ke dist/main.js yang baru aja di create sama si webpack. akses lagi tuh html dan boom lodash works
 8. selamat you already learn how to use webpack the really basic stuff tho
 
 
