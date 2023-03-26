@@ -1,0 +1,14 @@
+{
+  "name": "webpack-tuts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "build" : "webpack"
+  },
+  "author": "Cecep Budiman",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
