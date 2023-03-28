@@ -3,11 +3,7 @@ module.exports = {
     presets: [
         [
             '@babel/preset-env',
-            {
-                targets: {
-                    node: 'current',
-                },
-            },
+            // https://babeljs.io/docs/babel-preset-env
         ],
     ],
 };
